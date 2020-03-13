@@ -68,7 +68,7 @@ background-image: linear-gradient(to top, #527762 0%, #a2f3c4 100%);
 
 /* Start Gradient Area css
 ============================================================================================ */
-.gradient-bg, .primary-btn, .add-bag .add-btn, .single-product .product-details .prd-bottom .social-info span:after, .grid-btn:hover, .list-btn:hover, .grid-btn.active, .list-btn.active, .pagination a.active, .pagination a:hover, .s_Product_carousel .owl-dots div.active, .s_product_text .card_area .icon_btn:after, .product_description_area .nav.nav-tabs li a.active, .blog-pagination .page-item.active .page-link, .single-footer-widget .click-btn {
+.gradient-bg, .primary-btn, .add-bag .add-btn, .single-product .product-details .prd-bottom .social-info span:after, .grid-btn:hover, .list-btn:hover, .grid-btn.active, .list-btn.active, .pagination a.active, .pagination a:hover, .s_Product_carousel .owl-dots div.active, .s_product_text .card_area .icon_btn:after, .product_description_area .nav.nav-tabs li a.active, .blog-pagination .page-item.active .page-link, .single-footer-widget .click-btn, .submit_btn {
   background: -webkit-linear-gradient(90deg, #527762 0%, #a2f3c4 100%);
   background: -moz-linear-gradient(90deg, #527762 0%, #a2f3c4 100%);
   background: -o-linear-gradient(90deg, #527762 0%, #a2f3c4 100%);
@@ -90,12 +90,27 @@ background-image: linear-gradient(to top, #527762 0%, #a2f3c4 100%);
 
 /* Start primary btn css
 ============================================================================================ */
+.poppins { font-family: "Poppins", sans-serif; } 
+
+a.disabled {
+  pointer-events: none;
+  cursor: default;
+}
+
+.a-color {
+  color: #a2f3c4;
+}
+.a-color:hover {
+  color: #a2f3c4;
+}
+
 .primary-btn {
   position: relative;
   overflow: hidden;
   color: #fff;
   padding: 0 30px;
   line-height: 50px;
+  border: 0;
   border-radius: 50px;
   display: inline-block;
   text-transform: uppercase;
@@ -226,8 +241,8 @@ h1, h2, h3, h4, h5, h6 {
 .genric-btn {
   display: inline-block;
   outline: none;
-  line-height: 40px;
-  padding: 0 30px;
+  line-height: 20px;
+  padding: 0 10px;
   font-size: .8em;
   text-align: center;
   text-decoration: none;
@@ -1257,19 +1272,27 @@ h1, h2, h3, h4, h5, h6 {
       .banner-area .banner-content {
         padding-left: 0; } }
     .banner-area .banner-content h1 {
+      font-family: "Poppins", sans-serif;
       font-size: 60px;
       line-height: 66px;
       font-weight: 700;
       margin-bottom: 30px; }
       @media (max-width: 767px) {
         .banner-area .banner-content h1 {
+          font-family: "Poppins", sans-serif;
           font-size: 35px;
           line-height: 46px; } }
     .banner-area .banner-content p {
+      font-family: "Poppins", sans-serif;
       margin: 0; }
   @media (max-width: 991px) {
     .banner-area .banner {
       display: none; } }
+  .banner-area .banner-img img {
+    margin-bottom: 20px;
+    object-fit: cover;
+    width:50%;
+    height: 600px;}
 
 .add-bag {
   margin-top: 30px; }
@@ -3891,23 +3914,8 @@ label {
 /* Single Product Area css
 ============================================================================================ */
 .product_image_area {
-  padding-top: 120px; }
-
-.s_Product_carousel .owl-dots {
-  position: absolute;
-  right: 20px;
-  top: 50%;
-  transform: translateY(-50%); }
-  .s_Product_carousel .owl-dots div {
-    height: 5px;
-    width: 20px;
-    background: #dddddd;
-    margin: 5px;
-    display: block;
-    content: "";
-    border-radius: 50px; }
-    .s_Product_carousel .owl-dots div.active {
-      width: 30px; }
+  padding-top: 120px;
+  padding-bottom: 120px; }
 
 .s_product_text {
   margin-left: -15px;
@@ -4204,7 +4212,10 @@ label {
     padding-right: 30px; }
     .cart_inner .table tbody tr td .media .d-flex img {
       border: 1px solid #eeeeee;
-      border-radius: 3px; }
+      border-radius: 3px;
+      object-fit: cover;
+      width:100%;
+      height: 150px; }
   .cart_inner .table tbody tr td .media .media-body {
     vertical-align: middle;
     align-self: center; }
@@ -4381,8 +4392,17 @@ label {
     .cart_inner .table tbody tr.out_button_area .checkout_btn_inner .primary-btn:hover:before {
       left: 240px; }
 
+.submit_btn {
+  line-height: 50px;
+  border: 0px;
+  border-radius: 3px;
+  padding: 1px 40px;
+  display: inline-block;
+  text-transform: uppercase;
+  font-weight: 500; }
+
 .gray_btn {
-  line-height: 38px;
+  line-height: 50px;
   background: #e8f0f2;
   border: 1px solid #eeeeee;
   border-radius: 3px;
@@ -4728,7 +4748,10 @@ label {
   margin-right: -30px;
   position: relative; }
   .login_box_area .login_box_img img {
-    width: 100%; }
+    object-fit: cover;
+    width:100%;
+    height: 475px;
+    align-items: flex-start; }
   .login_box_area .login_box_img:before {
     position: absolute;
     left: 0;
@@ -4810,6 +4833,97 @@ label {
 
 /* End Login form Area css
 ============================================================================================ */
+/* Register form Area css
+============================================================================================ */
+.register_box_area .register_box_img {
+  margin-left: -30px;
+  position: relative; }
+  .register_box_area .register_box_img img {
+    object-fit: cover;
+    width:100%;
+    height: 515px;
+    align-items: flex-start; }
+  .register_box_area .register_box_img:before {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    content: "";
+    background: #000;
+    opacity: .5; }
+  .register_box_area .register_box_img .hover {
+    position: absolute;
+    top: 50%;
+    left: 0px;
+    text-align: center;
+    width: 100%;
+    transform: translateY(-50%); }
+    .register_box_area .register_box_img .hover h4 {
+      font-size: 24px;
+      color: #fff;
+      margin-bottom: 15px; }
+    .register_box_area .register_box_img .hover p {
+      max-width: 380px;
+      margin: 0px auto 25px;
+      color: #fff; }
+    .register_box_area .register_box_img .hover .primary-btn {
+      border-radius: 0px;
+      line-height: 38px;
+      text-transform: uppercase; }
+      .register_box_area .register_box_img .hover .primary-btn:hover:before {
+        left: 260px; }
+
+.register_form_inner {
+  box-shadow: 0px 10px 30px 0px rgba(0, 0, 0, 0.07);
+  height: 100%;
+  text-align: center; }
+  .register_form_inner h3 {
+    color: #222222;
+    text-transform: uppercase;
+    font-size: 18px;
+    margin-bottom: 30px; }
+  .register_form_inner .register_form {
+    max-width: 385px;
+    margin: auto; }
+  .register_form_inner.reg_form {
+    padding-top: 60px; }
+    .register_form_inner.reg_form h3 {
+      margin-bottom: 70px; }
+
+.register_form .form-group input {
+  height: 54px;
+  border: none;
+  border-bottom: 1px solid #cccccc;
+  border-radius: 0px;
+  outline: none;
+  box-shadow: none; }
+.register_form .form-group .creat_account {
+  margin-top: 10px;
+  margin-bottom: 15px;
+  text-align: left; }
+  .register_form .form-group .creat_account input {
+    height: auto;
+    margin-right: 10px; }
+.register_form .form-group .primary-btn {
+  display: block;
+  border-radius: 0px;
+  line-height: 38px;
+  width: 100%;
+  text-transform: uppercase;
+  border: none; }
+  .register_form .form-group .primary-btn:hover:before {
+    left: 370px; }
+.register_form .form-group a {
+  font-size: 14px;
+  color: #777777;
+  font-family: "Roboto", sans-serif;
+  margin-top: 20px;
+  display: block; }
+
+/* End Register form Area css
+============================================================================================ */
+
 /* Tracking Form Area css
 ============================================================================================ */
 .tracking_box_area .tracking_box_inner p {

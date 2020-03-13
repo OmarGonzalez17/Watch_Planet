@@ -18,7 +18,7 @@
 	<!-- meta character set -->
 	<meta charset="UTF-8">
 	<!-- Site Title -->
-	<title>Watch Planet | Home</title>
+	<title>Watch Planet | Contact</title>
 	<!--
 		CSS
 		============================================= -->
@@ -125,7 +125,7 @@
 						<div class="info_item">
 							<!-- <i class="lnr lnr-apartment"></i> -->
 							<h6>Arecibo, Puerto Rico</h6>
-							<p>Km. 0.8, PR-653, 00612</p>
+							<p>Carr. 653 Km. 0.8 Sector Las Dunas, Arecibo P.R. 00614</p>
 						</div>
 						<div class="info_item">
 							<!-- <i class="lnr lnr-phone-handset"></i> -->
@@ -180,7 +180,7 @@
 				<div class="single-footer-widget">
 					<h6>About Us</h6>
 					<p>
-						We are a watch eccomerce centered on giving our costumers the best experience possible.
+						We are a watch e-commerce centered on giving our costumers the best experience possible.
 					</p>
 				</div>
 			</div>
@@ -188,7 +188,7 @@
 				
 			</div>	
              <div class="footer-bottom d-flex justify-content-center align-items-center flex-wrap mt-5">
-				<p class="mx-auto">Copyright &copy; 2020 | <a href="">Privacy Policy</a> &middot; <a href="">Terms &amp; Conditions</a></p>
+				<p class="mx-auto">Copyright &copy; 2020 All rights reserved  |  <a class="a-color disabled" href="">Privacy Policy</a> &middot; <a class="a-color disabled" href="">Terms &amp; Conditions</a></p>
              </div>
 		</div>
 	</footer>

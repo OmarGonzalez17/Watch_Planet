@@ -119,9 +119,6 @@ $productTable = mysqli_query($conn, $productQuery);
 											<h1>'.$row['brand'].' '.$row['name'].'<br></h1>
 											<p>'.$row['description'].'</p>';
 									?>
-									<!-- <h1>Watch Planet <br>Collection!</h1>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-										dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p> -->
 								</div>
 							</div>
 							<div class="col-lg-7 text-center">
@@ -201,24 +198,20 @@ $productTable = mysqli_query($conn, $productQuery);
 				<div class="row">
                         <!-- single product -->
                     <?php
-	                    $productQuery = "SELECT * FROM watches";
+	                    $productQuery = "SELECT * FROM watches WHERE quantity > 0 AND status = 'active' LIMIT 4";
 						$productTable = mysqli_query($conn, $productQuery);
-                        $counter = 4;
-						while ($counter != 0)
+						while ($row = mysqli_fetch_assoc($productTable))
 						{
-                            $row = mysqli_fetch_assoc($productTable);
 							echo '<div class="col-lg-3 col-md-6">
-						<div class="single-product">
-							<img class="img-fluid" src="'.$row['image'].'" alt="">
-							<div class="product-details text-center">
-								<h6>'.$row['name'].'</h6>
-								<div class="price">$'.$row['price'].'</h6>
-								</div>
-							</div>
-						</div>
-					</div>';
-                            $counter = $counter - 1;
-
+									<div class="single-product">
+										<img class="img-fluid" src="'.$row['image'].'" alt="">
+										<div class="product-details text-center">
+											<h6>'.$row['name'].'</h6>
+											<div class="price">$'.$row['price'].'</h6>
+											</div>
+										</div>
+									</div>
+								</div>';
 						}
 						?>
                         
@@ -243,7 +236,7 @@ $productTable = mysqli_query($conn, $productQuery);
 				<div class="single-footer-widget">
 					<h6>About Us</h6>
 					<p>
-						We are a watch eccomerce centered on giving our costumers the best experience possible.
+						We are a watch e-commerce centered on giving our costumers the best experience possible.
 					</p>
 				</div>
 			</div>
@@ -251,7 +244,7 @@ $productTable = mysqli_query($conn, $productQuery);
 				
 			</div>	
              <div class="footer-bottom d-flex justify-content-center align-items-center flex-wrap mt-5">
-				<p class="mx-auto">Copyright &copy; 2020 | <a href="">Privacy Policy</a> &middot; <a href="">Terms &amp; Conditions</a></p>
+				<p class="mx-auto">Copyright &copy; 2020 All rights reserved  |  <a class="a-color disabled" href="">Privacy Policy</a> &middot; <a class="a-color disabled" href="">Terms &amp; Conditions</a></p>
              </div>
 		</div>
 	</footer>

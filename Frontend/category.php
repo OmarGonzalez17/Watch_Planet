@@ -37,7 +37,7 @@ $productTable = mysqli_query($conn, $productQuery);
 	<!-- meta character set -->
 	<meta charset="UTF-8">
 	<!-- Site Title -->
-	<title>Watch Planet | Home</title>
+	<title>Watch Planet | Shop</title>
 	<!--
 		CSS
 		============================================= -->
@@ -327,63 +327,16 @@ $productTable = mysqli_query($conn, $productQuery);
 						<?php
 						while ($row = mysqli_fetch_assoc($productTable))
 						{
-							getCatgElement($row['name'], $row['image'], $row['price'], $row['id']);
-
+							if (($row['quantity'] > 0) AND ($row['status'] == "active")) {
+								getCatgElement($row['name'], $row['image'], $row['price'], $row['id']);
+							}
 						}
 						?>
-						
 
-						<!-- <div class="col-lg-4 col-md-6">
-							<div class="single-product">
-								<img class="img-fluid" src="img/product/p1.jpg" alt="">
-								<div class="product-details">
-									<h6>addidas New Hammer sole
-										for Sports person</h6>
-									<div class="price">
-										<h6>$150.00</h6>
-										<h6 class="l-through">$210.00</h6>
-									</div>
-									<div class="prd-bottom">
-
-										<a href="" class="social-info">
-											<span class="ti-bag"></span>
-											<p class="hover-text">add to bag</p>
-										</a>
-										<a href="" class="social-info">
-											<span class="lnr lnr-heart"></span>
-											<p class="hover-text">Wishlist</p>
-										</a>
-										<a href="" class="social-info">
-											<span class="lnr lnr-sync"></span>
-											<p class="hover-text">compare</p>
-										</a>
-										<a href="" class="social-info">
-											<span class="lnr lnr-move"></span>
-											<p class="hover-text">view more</p>
-										</a>
-									</div>
-								</div>
-							</div>
-						</div> -->
-						<!-- single product -->
 						
 					</div>
 					</form>
 				</section>
-
-
-				<?php
-						//Gets the ID of the product clicked and saves it into session
-						//Sends you to product page of product clicked
-						// if(isset($_POST['thisProd'])){
-						// 	$currentID = $_POST['prodID'];
-						// 	echo "<script>alert('ID of Product Clicked: $currentID')</script>";
-						// 	$_SESSION['clickID'] = $currentID;
-						// 	echo "<script>window.location = 'single-product.php'</script>";
-						// }
-
-
-				?>
 				<!-- End Best Seller -->
 				<!-- Start Filter Bar -->
 				<div class="filter-bar d-flex flex-wrap align-items-center">
@@ -422,7 +375,7 @@ $productTable = mysqli_query($conn, $productQuery);
 				<div class="single-footer-widget">
 					<h6>About Us</h6>
 					<p>
-						We are a watch eccomerce centered on giving our costumers the best experience possible.
+						We are a watch e-commerce centered on giving our costumers the best experience possible.
 					</p>
 				</div>
 			</div>
@@ -430,7 +383,7 @@ $productTable = mysqli_query($conn, $productQuery);
 				
 			</div>	
              <div class="footer-bottom d-flex justify-content-center align-items-center flex-wrap mt-5">
-				<p class="mx-auto">Copyright &copy; 2020 | <a href="">Privacy Policy</a> &middot; <a href="">Terms &amp; Conditions</a></p>
+				<p class="mx-auto">Copyright &copy; 2020 All rights reserved  |  <a class="a-color disabled" href="">Privacy Policy</a> &middot; <a class="a-color disabled" href="">Terms &amp; Conditions</a></p>
              </div>
 		</div>
 	</footer>

@@ -2,7 +2,7 @@
 //require_once('./cartTesterDB.php');
 
 
-function singleItem($productName, $productPrice, $productCatg, $productDesc, $productImg, $productID){
+function singleItem($productName, $productPrice, $productDesc, $productImg, $productID){
     $element="
     
     <form action=\"single-product.php\" method=\"post\">
@@ -15,9 +15,6 @@ function singleItem($productName, $productPrice, $productCatg, $productDesc, $pr
 							<div class=\"single-prd-item\">
 								<img class=\"img-fluid\" src=\"$productImg\" alt=\"\" height=\"400\" width=\"200\">
 							</div>
-							<div class=\"single-prd-item\">
-								<img class=\"img-fluid\" src=\"$productImg\" alt=\"\" height=\"400\" width=\"200\">
-							</div>
 						</div>
 					</div>
 					<div class=\"col-lg-5 offset-lg-1\">
@@ -25,7 +22,7 @@ function singleItem($productName, $productPrice, $productCatg, $productDesc, $pr
 							<h3>$productName</h3>
 							<h2>$$productPrice</h2>
 							<ul class=\"list\">
-								<li><a class=\"active\" href=\"\"><span>Category</span> : $productCatg</a></li>
+								<li><a href=\"\"><span>Category</span> : Men</a></li>
 								<li><a href=\"\"><span>Availibility</span> : In Stock</a></li>
 							</ul>
 							<p>$productDesc

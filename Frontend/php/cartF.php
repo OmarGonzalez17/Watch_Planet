@@ -1,43 +1,41 @@
 <?php
 
 //receives image, name, and price
-function cartItem($productName, $productPrice, $image, $index, $qty){
+function cartItem($productBrand, $productName, $productPrice, $totalPrice, $image, $index, $qty){
 
-    $cartItem = 
-    "
-    <form action=\"cart.php\" method=\"post\">
+    $cartItem = '
+    <form action="cart.php" method="post">
     <tr>
     <td>
-        <div class=\"media\">
-            <div class=\"d-flex\">
-                <img src=\"$image\" alt=\"\" height=\"150\" width=\"auto\">
-                
+        <div class="media">
+            <div class="d-flex col-lg-2 px-1">
+                <img src="'.$image.'" alt="" height="150" width="auto">
             </div>
-            <div class=\"media-body\">
-                <p>$productName</p>
-                <input type=\"hidden\" name=\"cartIndex\" value='$index'>
-                <button name=\"remove\" type=\"submit\" class=\"genric-btn danger-border circle\">Remove Item ($index)</button>
+            <div class="media-body px-4">
+                <p class="pt-2 pb-1">'.$productBrand.' '.$productName.'</p>
+                <input type="hidden" name="cartIndex" value="'.$index.'">
+                <button name="remove" type="submit" class="genric-btn danger-border circle">Remove Item</button>
             </div>
             
         </div>
     </td>
     <td>
-        <h5>$$productPrice</h5>
+        <h5>$'.number_format($totalPrice,2).'</h5>
     </td>
     <td>
-        <div class=\"product_count\">
-            <input type=\"text\" name=\"qty$index\" id=\"sst$index\" maxlength=\"12\" value=\"$qty\" title=\"Quantity:\"
-                class=\"input-text qty\">
-            <button name=\"qty-up\" class=\"increase items-count\" type=\"submit\"><i class=\"lnr lnr-chevron-up\"></i></button>
-            <button name=\"qty-down\" class=\"reduced items-count\" type=\"submit\"><i class=\"lnr lnr-chevron-down\"></i></button>
+        <div class="product_count">
+            <input type="text" name="qty'.$index.'" id="sst'.$index.'" maxlength="12" value="'.$qty.'" title="Quantity:"
+                class="input-text qty">
+            <button name="qty-up" class="increase items-count" type="submit"><i class="lnr lnr-chevron-up"></i></button>
+            <button name="qty-down" class="reduced items-count" type="submit"><i class="lnr lnr-chevron-down"></i></button>
         </div>
     </td>
     <td>
-        <h5>$$productPrice</h5>
+        <h5>$'.number_format($productPrice,2).'</h5>
     </td>
     </tr>
     </form>
-    ";
+    ';
     echo $cartItem;
 }
 
