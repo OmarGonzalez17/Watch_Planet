@@ -25,6 +25,7 @@ $shipZip = $_SESSION['shipZip'];
 $shipCountry = $_SESSION['shipCountry'];
 $total = $_SESSION['total'];
 $subTotal = $_SESSION['subtotal'];
+$taxes = $_SESSION['tax'];
 
 
 //SESSION VARIABLES $_SESSION[]
@@ -163,7 +164,7 @@ $subTotal = $_SESSION['subtotal'];
 						<ul class="list">
 							<li><a href="#"><span>Order number</span> : 321</a></li>
 							<li><a href="#"><span>Date</span> : <?php echo $confirm_date?></a></li>
-							<li><a href="#"><span>Total</span> : $<?php echo $total?></a></li>
+							<li><a href="#"><span>Total</span> : $<?php echo number_format($total,2)?></a></li>
 							<li><a href="#"><span>Payment method</span> : Paypal</a></li>
 						</ul>
 					</div>
@@ -247,6 +248,17 @@ $subTotal = $_SESSION['subtotal'];
 								</td>
 								<td>
 									<p><?php echo "$".number_format($subTotal, 2)?></p>
+								</td>
+							</tr>
+														<tr>
+								<td>
+									<h4>Taxes</h4>
+								</td>
+								<td>
+									<h5></h5>
+								</td>
+								<td>
+									<p><?php echo "$".number_format($taxes, 2)?></p>
 								</td>
 							</tr>
 							<tr>

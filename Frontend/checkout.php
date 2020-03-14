@@ -268,7 +268,7 @@ $productTable = mysqli_query($conn, $productQuery);
                                 <label for="f-option4">I’ve read and accept the </label>
                                 <a href="#">terms & conditions*</a>
                             </div> -->
-                            <button class="primary-btn btn-block" form="addressForm">Place Order</button>
+                            <button class="primary-btn btn-block" form="addressForm">Proceeed to Paypal</button>
                         </div>
                     </div>
                 </div>
