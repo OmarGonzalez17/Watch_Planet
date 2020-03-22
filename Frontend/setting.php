@@ -1,11 +1,30 @@
 <?php
     session_start();
     require 'includes/connection.inc.php';
-    require_once ('./php/categoryTemp.php');
+	require_once ('./php/categoryTemp.php');
+	if (!isset($_SESSION['id'])) {
+        header("Location: 401.html");
+	}
+	$idNum = $_SESSION['id'];
+	$shipQuery = "SELECT * FROM shipping_address WHERE user_id = $idNum";
+	$billQuery = "SELECT * FROM billing_address WHERE user_id = $idNum";
+	$shipResult = mysqli_query($conn, $shipQuery);
+	$billResult = mysqli_query($conn, $billQuery);
+	$resultCheck = mysqli_num_rows($shipResult);
+	$shipRow = mysqli_fetch_assoc($shipResult);
+	$billRow = mysqli_fetch_assoc($billResult);
+	if ($resultCheck > 0) {	
+	$_SESSION['phoneNum'] = $shipRow['phoneNum'];
+	$_SESSION['street'] = $billRow['street'];
+	$_SESSION['city'] = $billRow['city'];
+	$_SESSION['country'] = $billRow['country'];
+	$_SESSION['zip'] = $billRow['zip'];
+	$_SESSION['shipStreet'] = $shipRow['shipStreet'];
+	$_SESSION['shipCity'] = $shipRow['shipCity'];
+	$_SESSION['shipCountry'] = $shipRow['shipCountry'];
+	$_SESSION['shipZip'] = $shipRow['shipZip'];
+	}
 
-//define a query to get product information
-$productQuery = "SELECT * FROM watches";
-$productTable = mysqli_query($conn, $productQuery);
 ?>
 <!DOCTYPE html>
 <html lang="zxx" class="no-js">
@@ -22,7 +41,7 @@ $productTable = mysqli_query($conn, $productQuery);
 	<!-- meta character set -->
 	<meta charset="UTF-8">
 	<!-- Site Title -->
-	<title>Watch Planet | Home</title>
+	<title>Watch Planet | Settings</title>
 	<!--
 		CSS
 		============================================= -->
@@ -57,7 +76,7 @@ $productTable = mysqli_query($conn, $productQuery);
 					<!-- Collect the nav links, forms, and other content for toggling -->
 					<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
 						<ul class="nav navbar-nav menu_nav ml-auto">
-							<li class="nav-item active"><a class="nav-link" href="index.php">Home</a></li>
+							<li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
 							<li class="nav-item"><a class="nav-link" href="category.php">Shop</a></li>
 							<li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
                                     <?php
@@ -86,9 +105,6 @@ $productTable = mysqli_query($conn, $productQuery);
 							<li class="nav-item">
 								<button class="search"><span class="lnr lnr-magnifier" id="search"></span></button>
 							</li>
-							<li class="nav-item">
-							<a href="setting.php"><span class="fa fa-cog" aria-hidden="true"></span></a>
-							</li>
 						</ul>
 					</div>
 				</div>
@@ -106,125 +122,103 @@ $productTable = mysqli_query($conn, $productQuery);
 	</header>
 	<!-- End Header Area -->
 
-	<!-- start banner Area -->
-	<section class="banner-area">
+	<section class="login_box_area section_gap mt-5">
 		<div class="container">
-			<div class="row fullscreen align-items-center justify-content-start">
-				<div class="col-lg-12">
-					<div class="active-banner">
-						<!-- single-slide -->
-						<div class="row single-slide align-items-center d-flex">
-							<div class="col-lg-5">
-								<div class="banner-content">
-									<?php
-										$row = mysqli_fetch_assoc($productTable);
-										echo '
-											<h1>'.$row['brand'].' '.$row['name'].'<br></h1>
-											<p>'.$row['description'].'</p>';
-									?>
-								</div>
-							</div>
-							<div class="col-lg-7 text-center">
-								<div class="banner-img mx-auto">
-									<?php
-										echo'<img class="img" src="'.$row['image'].'" alt="">;';
-
-									?>
-									
-								</div>
-							</div>
-						</div>
+        <h3 class="mgbt-xs-15 mgtp-10 font-semibold"><i class="fa fa-user"></i> User</h3>
+        <div class="row">
+		<div class="col-lg-4">
+					<div class="details_item">
+						<h4>Account</h4>
+						<ul class="list">
+							<li><span>Name</span> : <?php echo $_SESSION["name"]?></li>
+							<li><span>Last Name</span> : <?php echo $_SESSION["last_name"]?></li>
+							<li><span>Email</span> : <?php echo $_SESSION["email"]?></li>
+							<?php
+							if ($resultCheck > 0) {	
+								echo '<li><span>Phone Number</span> : '.$_SESSION["phoneNum"].'</li>';
+							}
+							?>
+						</ul>
 					</div>
 				</div>
+				<?php
+			
+				if ($resultCheck > 0) {	
+				echo
+				'<div class="col-lg-4">
+					<div class="details_item">
+						<h4>Shipping Address <a href="#"><i class="fa fa-pencil-square-o"></i></a></h4>
+						<ul class="list">
+							<li><span>Street </span>: '.$_SESSION['street'].'</li>
+							<li><span>City </span>: '.$_SESSION['city'].'</li>
+							<li><span>Country </span>: '.$_SESSION['country'].'</li>
+							<li><span>Postcode </span>: '.$_SESSION['zip'].'</li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<div class="details_item">
+						<h4>Billing Address <a href="#"><i class="fa fa-pencil-square-o"></i></a></h4>
+						<ul class="list">
+							<li><span>Street </span>: '.$_SESSION['street'].'</li>
+							<li><span>City </span>: '.$_SESSION['city'].'</li>
+							<li><span>Country </span>: '.$_SESSION['country'].'</li>
+							<li><span>Postcode </span>: '.$_SESSION['zip'].'</li>
+						</ul>
+					</div>
+				</div>';
+				}
+				?>
 			</div>
-		</div>
-	</section>
-	<!-- End banner Area -->
-
-	<!-- start features Area -->
-	<section class="features-area section_gap">
-		<div class="container">
-			<div class="row features-inner">
-				<!-- single features -->
-				<div class="col-lg-3 col-md-6 col-sm-6">
-					<div class="single-features">
-						<div class="f-icon">
-							<img src="img/features/f-icon1.png" alt="">
-						</div>
-						<h6>Free Shipping</h6>
-					</div>
-				</div>
-				<!-- single features -->
-				<div class="col-lg-3 col-md-6 col-sm-6">
-					<div class="single-features">
-						<div class="f-icon">
-							<img src="img/features/f-icon2.png" alt="">
-						</div>
-						<h6>Return Policy</h6>
-					</div>
-				</div>
-				<!-- single features -->
-				<div class="col-lg-3 col-md-6 col-sm-6">
-					<div class="single-features">
-						<div class="f-icon">
-							<img src="img/features/f-icon3.png" alt="">
-						</div>
-						<h6>24/7 Support</h6>
-					</div>
-				</div>
-				<!-- single features -->
-				<div class="col-lg-3 col-md-6 col-sm-6">
-					<div class="single-features">
-						<div class="f-icon">
-							<img src="img/features/f-icon4.png" alt="">
-						</div>
-						<h6>Secure Payment</h6>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- end features Area -->
-
-	<!-- start product Area -->
-	<section>
-		<!-- single product slide -->
-		<div class="single-product">
-			<div class="container">
-				<div class="row justify-content-center">
-					<div class="col-lg-6 text-center">
-						<div class="section-title">
-							<h1>Top Products</h1>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-                        <!-- single product -->
-                    <?php
-	                    $productQuery = "SELECT * FROM watches WHERE quantity > 0 AND status = 'active' LIMIT 4";
-						$productTable = mysqli_query($conn, $productQuery);
-						while ($row = mysqli_fetch_assoc($productTable))
-						{
-							echo '<div class="col-lg-3 col-md-6">
-									<div class="single-product">
-										<img class="img-fluid" src="'.$row['image'].'" alt="">
-										<div class="product-details text-center">
-											<h6>'.$row['name'].'</h6>
-											<div class="price">$'.$row['price'].'</h6>
-											</div>
-										</div>
-									</div>
-								</div>';
-						}
-						?>
-                        
-				</div>
-			</div>
-		</div>
-		<!-- single product slide -->
+        <hr>
+        <h3 class="mgbt-xs-15 mgtp-10 font-semibold"><i class="fa fa-shopping-bag"></i> Orders</h3>
+        <div class="row">
+		<?php
+		 echo '
+                                   
 		
+		 <div class="card-body">
+			 <div class="table-responsive">
+				 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+					 <thead>
+						 <tr>';
+									echo " <th>Product Brand</th>
+										   <th>Product Name</th>
+										   <th>Quantity</th>";
+
+			  echo           '</tr>
+				  
+					 <tbody>';
+									  $orderQuery = "SELECT watches.brand, watches.name, orderDetails.quantity
+                                                     FROM watches 
+                                                     JOIN orderDetails 
+                                                     ON watches.id = orderDetails.watch_id
+                                                     JOIN orders
+                                                     ON orders.order_id = orderDetails.order_id WHERE user_id = $idNum;";
+                                                      $orderResult = mysqli_query($conn, $orderQuery);   
+                                                      $orderResultCheck = mysqli_num_rows($orderResult);
+                                                        
+                                                      if($orderResultCheck > 0){
+                                                        while($row = mysqli_fetch_assoc($orderResult)){
+                                                            if(!empty($row['brand'])){
+                                                               echo "<tr><td>".$row['brand']."</td>". 
+                                                               "<td>".$row['name']."</td>".
+                                                               "<td>".$row['quantity']."</td>";
+                                                            } else{
+                                                                echo "<td>0</td>";
+                                                            }
+                                                        }
+													 } 
+													 echo   '</tbody>
+													 </table>
+												 </div>
+											 </div>		 
+										';
+			?>
+          </div>
+        </div>  
+		</div>
 	</section>
-	<!-- end product Area -->
 
 	<!-- start footer Area -->
 	<footer class="footer-area">
@@ -253,6 +247,7 @@ $productTable = mysqli_query($conn, $productQuery);
 	</footer>
 	<!-- End footer Area -->
 
+
 	<script src="js/vendor/jquery-2.2.4.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
 	 crossorigin="anonymous"></script>
@@ -261,7 +256,6 @@ $productTable = mysqli_query($conn, $productQuery);
 	<script src="js/jquery.nice-select.min.js"></script>
 	<script src="js/jquery.sticky.js"></script>
 	<script src="js/nouislider.min.js"></script>
-	<script src="js/countdown.js"></script>
 	<script src="js/jquery.magnific-popup.min.js"></script>
 	<script src="js/owl.carousel.min.js"></script>
 	<!--gmaps Js-->

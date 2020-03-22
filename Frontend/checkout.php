@@ -102,6 +102,9 @@ $productTable = mysqli_query($conn, $productQuery);
                             <li class="nav-item">
                                 <button class="search"><span class="lnr lnr-magnifier" id="search"></span></button>
                             </li>
+                            <li class="nav-item">
+							<a href="setting.php"><span class="fa fa-cog" aria-hidden="true"></span></a>
+							</li>
                         </ul>
                     </div>
                 </div>

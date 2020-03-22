@@ -139,7 +139,7 @@
                             <li class="breadcrumb-item active">Admins</li>
                         </ol>
                         <?php
-                            $sql = "SELECT * FROM admins WHERE status = 'inactive';";
+                        
                             $result = mysqli_query($conn, $sql);
                             $resultCheck = mysqli_num_rows($result);
 

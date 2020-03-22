@@ -1,4 +1,5 @@
 <?php
+require 'includes/connection.inc.php';
 require_once ('./php/cartF.php');
 require_once('./php/cartTesterDB.php');
 session_start();
@@ -20,6 +21,22 @@ $_SESSION['shipAddress'] = $_POST['shipAddressLine1'].$_POST['shipAddressLine2']
 $_SESSION['shipCity'] = $_POST['shipCity'];
 $_SESSION['shipZip'] = $_POST['shipZip'];
 $_SESSION['shipCountry'] = $_POST['shipCountry'];
+$phoneNumber = $_POST['number'];
+$shipCountry = $_POST['shipCountry'];
+$shipCity = $_POST['shipCity'];
+$shipZip = $_POST['shipZip'];
+$shipStreet = $_POST['shipAddressLine1'];
+$country = $_POST['country'];
+$city = $_POST['city'];
+$zip = $_POST['zip'];
+$street = $_POST['addressLine1'];
+$user_id = $_SESSION['id']; 
+$sql = "INSERT INTO billing_address (user_id, country, city, street, zip) VALUES ($user_id, '".$country."', '".$city."', '".$street."', '".$zip."');";
+$result = mysqli_query($conn, $sql);
+$query = "INSERT INTO shipping_address (user_id, shipCountry, shipCity, shipStreet, shipZip, phoneNum) VALUES ($user_id, '".$shipCountry."', '".$shipCity."', '".$shipStreet."', '".$shipZip."', '".$phoneNumber."');";
+$billResult = mysqli_query($conn, $query);
+
+
 
 
 //SESSION VARIABLES $_SESSION[]
