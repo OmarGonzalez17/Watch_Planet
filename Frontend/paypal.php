@@ -6,20 +6,25 @@ $productQuery = "SELECT * FROM watches";
 $productTable = mysqli_query($conn, $productQuery);
 
 // VALUES OBTAINED FROM FORM
-$_SESSION['firstName'] = $_POST['firstName'];;
-$_SESSION['lastName'] = $_POST['lastName'];
+
+$_SESSION['first_name'] = $_POST['firstName'];;
+$_SESSION['last_name'] = $_POST['lastName'];
 $_SESSION['email'] = $_POST['email'];
 $_SESSION['country']= $_POST['country'];
-$_SESSION['phoneNumber']= $_POST['number'];
-$_SESSION['address']= $_POST['addressLine1'].$_POST['addressLine2'];
+$_SESSION['phone_number'] = $_POST['number'];
+$_SESSION['address_line1']= $_POST['addressLine1'];
+$_SESSION['address_line2'] = $_POST['addressLine2'];
 $_SESSION['city'] = $_POST['city'];
+$_SESSION['country'] = $_POST['country'];
 $_SESSION['zip'] = $_POST['zip'];
-$_SESSION['shipFirstName'] = $_POST['shipFirstName'];
-$_SESSION['shipLastName'] = $_POST['shipLastName'];
-$_SESSION['shipAddress'] = $_POST['shipAddressLine1'].$_POST['shipAddressLine2'];
-$_SESSION['shipCity'] = $_POST['shipCity'];
-$_SESSION['shipZip'] = $_POST['shipZip'];
-$_SESSION['shipCountry'] = $_POST['shipCountry'];
+
+$_SESSION['ship_first_name'] = $_POST['shipFirstName'];
+$_SESSION['ship_last_name'] = $_POST['shipLastName'];
+$_SESSION['ship_address_line1'] = $_POST['shipAddressLine1'];
+$_SESSION['ship_address_line2'] = $_POST['shipAddressLine2'];
+$_SESSION['ship_city'] = $_POST['shipCity'];
+$_SESSION['ship_zip'] = $_POST['shipZip'];
+$_SESSION['ship_country'] = $_POST['shipCountry'];
 
 
 //SESSION VARIABLES $_SESSION[]
@@ -72,7 +77,7 @@ $_SESSION['shipCountry'] = $_POST['shipCountry'];
                             <div class="col">
                                 <div class="text-center mt-4">
                                     <img class="my-5" src="img/watch-images/paypal_logo.png" width="auto" height="300px" />
-                                    <a class="primary-btn text-white" href="confirmation.php">Place Order</a>
+                                    <a class="primary-btn text-white" href="includes/insertOrderIntoDB.inc.php">Place Order</a>
                                 </div>
                             </div>
                         </div>

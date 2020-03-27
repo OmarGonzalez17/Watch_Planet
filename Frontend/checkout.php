@@ -110,7 +110,7 @@ $productTable = mysqli_query($conn, $productQuery);
         <div class="search_input" id="search_input_box">
             <div class="container">
                 <form class="d-flex justify-content-between">
-                    <input type="text" class="form-control" id="search_input" placeholder="Search Here">
+                    <input type="text" class="form-control" id="search_input" placeholder="Search Here" >
                     <button type="submit" class="btn"></button>
                     <span class="lnr lnr-cross" id="close_search" title="Close Search"></span>
                 </form>
@@ -145,17 +145,17 @@ $productTable = mysqli_query($conn, $productQuery);
                         <h3>Billing Details</h3>
                         <form class="row contact_form" id="addressForm" action="paypal.php" method="post">
                             <div class="col-md-6 form-group p_star">
-                                <input type="text" class="form-control" id="first" name="firstName" placeholder="First Name" >
+                                <input type="text" class="form-control" id="first" name="firstName" placeholder="First Name" required >
                             </div>
                             <div class="col-md-6 form-group p_star">
-                                <input type="text" class="form-control" id="last" name="lastName" placeholder="Last Name" >
+                                <input type="text" class="form-control" id="last" name="lastName" placeholder="Last Name" required>
                             </div>
                             
                             <div class="col-md-6 form-group p_star">
-                                <input type="text" class="form-control" id="number" name="number" placeholder="Phone Number" >
+                                <input type="text" class="form-control" id="number" name="number" placeholder="Phone Number" required>
                             </div>
                             <div class="col-md-6 form-group p_star">
-                                <input type="text" class="form-control" id="last" name="email" placeholder="E-mail" >
+                                <input type="text" class="form-control" id="last" name="email" placeholder="E-mail" required>
                             </div>
                             <div class="col-md-12 form-group p_star" required>
                                 <select class="country_select" name="country">
@@ -164,16 +164,16 @@ $productTable = mysqli_query($conn, $productQuery);
                                 </select>
                             </div>
                             <div class="col-md-12 form-group p_star">
-                                <input type="text" class="form-control" id="address1" name="addressLine1" placeholder="Address Line 1" >
+                                <input type="text" class="form-control" id="address1" name="addressLine1" placeholder="Address Line 1" required >
                             </div>
                             <div class="col-md-12 form-group p_star">
                                 <input type="text" class="form-control" id="address2" name="addressLine2" placeholder="Address Line 2">
                             </div>
                             <div class="col-md-12 form-group p_star">
-                                <input type="text" class="form-control" id="city" name="city" placeholder="Town/City" >
+                                <input type="text" class="form-control" id="city" name="city" placeholder="Town/City" required>
                             </div>
                             <div class="col-md-12 form-group">
-                                <input type="text" class="form-control" id="zip" name="zip" placeholder="Postcode/ZIP" >
+                                <input type="text" class="form-control" id="zip" name="zip" placeholder="Postcode/ZIP" required>
                             </div>
 
 
@@ -186,21 +186,22 @@ $productTable = mysqli_query($conn, $productQuery);
                                 <h3>Shipping Details</h3>
                             </div>
                             <div class="col-md-6 form-group p_star">
-                                <input type="text" class="form-control" id="first" name="shipFirstName" placeholder="First Name" >
+                                <input type="text" class="form-control" id="first" name="shipFirstName" placeholder="First Name" required>
                             </div>
                             <div class="col-md-6 form-group p_star">
-                                <input type="text" class="form-control" id="last" name="shipLastName" placeholder="Last Name" >
+                                <input type="text" class="form-control" id="last" name="shipLastName" placeholder="Last Name" required>
                             </div>
                             
                             
                             <div class="col-md-12 form-group p_star">
-                                <input type="text" class="form-control" id="address1" name="shipAddressLine1" placeholder="Address Line 1" >
+                                <input type="text" class="form-control" id="address1" name="shipAddressLine1" placeholder="Address Line 1" required>
                             </div>
+                            
                             <div class="col-md-12 form-group p_star">
                                 <input type="text" class="form-control" id="address2" name="shipAddressLine2" placeholder="Address Line 2" >
                             </div> 
                              <div class="col-md-12 form-group p_star">
-                                <input type="text" class="form-control" id="city" name="shipCity" placeholder="Town/City" >
+                                <input type="text" class="form-control" id="city" name="shipCity" placeholder="Town/City" required>
                             </div>
                              <div class="col-md-12 form-group p_star">
                                 <select class="country_select" name="shipCountry" >
@@ -209,7 +210,7 @@ $productTable = mysqli_query($conn, $productQuery);
                                 </select>
                             </div>
                             <div class="col-md-12 form-group">
-                                <input type="text" class="form-control" id="zip" name="shipZip" placeholder="Postcode/ZIP" >
+                                <input type="text" class="form-control" id="zip" name="shipZip" placeholder="Postcode/ZIP"  required>
                             </div>                         
                         </form>
                     </div>
@@ -268,7 +269,7 @@ $productTable = mysqli_query($conn, $productQuery);
                                 <label for="f-option4">I’ve read and accept the </label>
                                 <a href="#">terms & conditions*</a>
                             </div> -->
-                            <button class="primary-btn btn-block" form="addressForm">Place Order</button>
+                            <button class="primary-btn btn-block" form="addressForm">Proceeed to Paypal</button>
                         </div>
                     </div>
                 </div>

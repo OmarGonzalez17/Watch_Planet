@@ -3,11 +3,26 @@ session_start();
 require_once ('./php/cartF.php');
 require_once('./php/cartTesterDB.php');
 
-$productQuery = "SELECT * FROM watches";
-$productTable = mysqli_query($conn, $productQuery);
+require_once('includes/connection.inc.php');
 
-$invoice_date = date("d-m-Y");
-$invoice_date = str_replace("-","/", $invoice_date);
+$user_id = $_SESSION['id'];
+$invoice_id = $_GET['invoice_id'];
+
+
+$sql = "SELECT invoice_id, users.name AS first_name, last_name, email, ship_address_line1, ship_address_line2, order_date  
+FROM invoice 
+JOIN orders ON invoice.order_id = orders.order_id
+JOIN users ON users.id = orders.user_id
+JOIN shipping ON shipping.order_id = orders.order_id
+WHERE invoice.invoice_id = $invoice_id;";
+
+$result = mysqli_query($conn, $sql);
+$row = mysqli_fetch_assoc($result); 
+$invoice_date =  getdate(strtotime($row['order_date']));
+$invoice_date = $invoice_date['month'].' '.$invoice_date['mday'].', '.$invoice_date['year'];
+
+
+
 
 //SESSION VARIABLES $_SESSION[]
 // $_SESSION['clickID'] -> Variable that saves ID of product clicked
@@ -31,111 +46,111 @@ $invoice_date = str_replace("-","/", $invoice_date);
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
-<header>
-                <div class="row mx-auto d-flex">
-                    <div class="col">
-                        <a href="index.php">
-                            <img src="img/brand/watch_planet.png"  width="300px"/>
-                            </a>
-                    </div>
-                    <div class="col-6 align-self-center company-details">
-                        <h2 class="name">
-                            <a target="_blank" href="https://lobianijs.com">
-                            </a>
-                        </h2>
-                        <div class="text-right">Carr. 653 Km. 0.8 Sector Las Dunas, Arecibo P.R. 00614</div>
-                        <div class="text-right">(787) 815-0000</div>
-                        <div class="text-right">contact@watch-planet.com</div>
-                    </div>
-                </div>
-            </header>
-<div id="invoice">
-    <div class="invoice mx-auto overflow-auto">
-        <div style="min-width: 600px">
-            
-            <main>
-                <div class="row contacts">
-                    <div class="col-8 invoice-to">
-                        <div class="text-gray-light">INVOICE TO:</div>
-                        <h2 class="to"><?php echo $_SESSION['firstName'].' '.$_SESSION['lastName']?></h2>
-                        <div class="address"><?php echo $_SESSION['address']?></div>
-                        <div class="email"><a href="mailto:john@example.com"><?php echo $_SESSION['email']?></a></div>
-                    </div>
-                    <div class="col invoice-details">
-                        <h1 class="invoice-id">INVOICE: #321</h1>
-                        <div class="date">Date of Invoice: <?php echo $invoice_date?></div>
-                        <!--<div class="date">Due Date: 30/10/2018</div>-->
-                    </div>
-                </div>
-                <table border="0" cellspacing="0" cellpadding="0">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th class="text-left">DESCRIPTION</th>
-                            <th class="text-right">PRICE</th>
-                            <th class="text-right">QUANTITY</th>
-                            <th class="text-right">TOTAL</th>
-                        </tr>
-                    </thead>
-                    <tbody>
 
-                        
+
+
+    <header>
+        <div class="row mx-auto d-flex">
+            <div class="col">
+                <a href="index.php">
+                    <img src="img/brand/watch_planet.png"  width="300px"/>
+                </a>
+            </div>
+            <div class="col-6 align-self-center company-details">
+                <h2 class="name">
+                    <a target="_blank" href="https://lobianijs.com">
+                    </a>
+                </h2>
+                <div class="text-right">Carr. 653 Km. 0.8 Sector Las Dunas, Arecibo P.R. 00614</div>
+                <div class="text-right">(787) 815-0000</div>
+                <div class="text-right">contact@watch-planet.com</div>
+            </div>
+        </div>
+    </header>
+    <div id="invoice">
+        <div class="invoice mx-auto overflow-auto">
+            <div style="min-width: 600px">
+
+                <main>
+                    <div class="row contacts">
+                        <div class="col-8 invoice-to">
+                            <div class="text-gray-light">INVOICE TO:</div>
+                            <h2 class="to"><?php echo $row['first_name'].' '.$row['last_name']?></h2>
+                            <div class="address"><?php echo $row['ship_address_line1'].$row['ship_address_line2']?></div>
+                            <div class="email"><a href="mailto:john@example.com"><?php echo $row['email']?></a></div>
+                        </div>
+                        <div class="col invoice-details">
+                            <h1 class="invoice-id">INVOICE: #<?php echo $row['invoice_id']?></h1>
+                            <div class="date">Date of Invoice: <?php echo $invoice_date?></div>
+                            <!--<div class="date">Due Date: 30/10/2018</div>-->
+                        </div>
+                    </div>
+                    <table border="0" cellspacing="0" cellpadding="0">
+                        <thead>
+                            <tr>
+
+                                <th class="text-left">DESCRIPTION</th>
+                                <th class="text-right">PRICE</th>
+                                <th class="text-right">QUANTITY</th>
+                                <th class="text-right">TOTAL</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+
                             <?php
-                            $cartIndex = 0; //stores index for every cart item on session list (used for item removal)
-                                $subtotal = 0; //stores subtotal
+                            $user_id = $_SESSION['id'];
+                            $sql = "SELECT invoice_id, users.name AS first_name, last_name, email, ship_address_line1, ship_address_line2, order_date,  watches.name, brand, description, orderdetails.quantity, watches.price, orderdetails.quantity * watches.price AS total_price_per_item_quantity
+                            FROM invoice 
+                            JOIN orders ON invoice.order_id = orders.order_id
+                            JOIN users ON users.id = orders.user_id
+                            JOIN shipping ON shipping.order_id = orders.order_id
+                            JOIN orderdetails ON orderdetails.order_id = orders.order_id
+                            JOIN watches ON watches.id = orderdetails.watch_id
+                            WHERE invoice.invoice_id = $invoice_id";
 
-                                //fetch all products in our table
-                                while ($row = mysqli_fetch_assoc($productTable))
-                                {
-                                    //fetch all of our ID's stored in our cart array
-                                    foreach (array_column($_SESSION['cart'], "prodID") as $currentID){
-                                        //Only display products with ID's in our cart array.
-                                        if ($currentID == $row['id']){
-                                            $price =  (int)$row['price'];
-                                            //fetches item quantity from quantity arrray using the same index of our cart array
-                                            $quantity = (int)$_SESSION['qty'][$cartIndex]; 
-                                            $qtyPrice = $price * $quantity;
-                                           // cartItem($row['name'], $qtyPrice, $row['image'], $cartIndex, $quantity);
-                                            $cartIndex++;
-                                            $subtotal = $subtotal + $qtyPrice;
-                                             echo " <tr>
-                                                        <td class='no'>".$cartIndex."</td>
-                                                        <td class='text-left'><h3>
-                                                            <a target='_blank'>"
-                                                            .$row['name'].
-                                                            "</a>
-                                                            </h3>
-                                                           <a target='_blank' href='https://www.youtube.com/channel/UC_UMEcP_kF0z4E6KbxCpV1w'>
-                                                               
-                                                           </a>"
-                                                           .$row['description']."
-                                                        </td>
-                                                        <td class='unit'>$".number_format($row['price'],2)."</td>
-                                                        <td class='qty'>".$quantity."</td>
-                                                        <td class='total'>$".number_format($qtyPrice, 2)."</td>
-                                    </tr>";
-                                        }
-                                    }
-                                }
-                                ?>
-                        
-                        
-                    </tbody>
-                    <tfoot>
+
+                            $result = mysqli_query($conn, $sql);
+                            $resultCheck = mysqli_num_rows($result);
+                            $total_price_of_items = 0;
+                            if($resultCheck > 0){
+                                while($row = mysqli_fetch_assoc($result)){
+                                 echo "
+                                 <tr>
+                                 <td><h2>{$row['name']}</h2>
+                                 {$row['description']}
+                                 </td>
+                                 <td>{$row['price']}</td>
+                                 <td>{$row['quantity']}</td>
+                                 <td>{$row['total_price_per_item_quantity']}</td>
+                                    <tr>
+
+                                 ";
+                                 $total_price_of_items += $row['price'] * $row['quantity'];
+
+                             }
+                         }
+                           $tax = 0.115 * $total_price_of_items;
+                           $total_pricing = $total_price_of_items + $tax;
+                         ?>
+
+
+                     </tbody>
+                     <tfoot>
                         <tr>
                             <td colspan="2"></td>
                             <td colspan="2">SUBTOTAL</td>
-                            <td>$<?php echo number_format($_SESSION['subtotal'],2)?></td>
+                            <td>$<?php echo number_format($total_price_of_items,2)?></td>
                         </tr>
                         <tr>
                             <td colspan="2"></td>
                             <td colspan="2">TAX 11.5%</td>
-                            <td>$<?php echo number_format($_SESSION['tax'],2)?></td>
+                            <td>$<?php echo number_format($tax,2)?></td>
                         </tr>
                         <tr>
                             <td colspan="2"></td>
                             <td colspan="2">GRAND TOTAL</td>
-                            <td>$<?php echo number_format($_SESSION['total'],2)?></td>
+                            <td>$<?php echo number_format($total_pricing,2)?></td>
                         </tr>
                     </tfoot>
                 </table>
@@ -151,13 +166,14 @@ $invoice_date = str_replace("-","/", $invoice_date);
 </div>
 </body>
 <script>
-     $('#printInvoice').click(function(){
-            Popup($('.invoice')[0].outerHTML);
-            function Popup(data) 
-            {
-                window.print();
-                return true;
-            }
-        });
+   $('#printInvoice').click(function(){
+    Popup($('.invoice')[0].outerHTML);
+    function Popup(data) 
+    {
+        window.print();
+        return true;
+    }
+});
 </script>
 </html>
+

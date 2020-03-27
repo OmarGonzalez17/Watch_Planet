@@ -9,22 +9,25 @@ $confirm_date = date("d-m-Y");
 $confirm_date = str_replace("-","/", $confirm_date);
 
 // VALUES OBTAINED FROM FORM
-$firstName = $_SESSION['firstName'];
-$lastName = $_SESSION['lastName'];
+$firstName = $_SESSION['first_name'];
+$lastName = $_SESSION['last_name'];
 $email = $_SESSION['email'];
 $country = $_SESSION['country'];
-$phoneNumber = $_SESSION['phoneNumber'];
-$address = $_SESSION['address'];
+$phoneNumber = $_SESSION['phone_number'];
+$address = $_SESSION['address_line1'] . $_SESSION['address_line2'];
 $city = $_SESSION['city'];
 $zip = $_SESSION['zip'];
-$shipFirstName = $_SESSION['shipFirstName'];
-$shipLastName = $_SESSION['shipLastName'];
-$shipAddress = $_SESSION['shipAddress'];
-$shipCity = $_SESSION['shipCity'];
-$shipZip = $_SESSION['shipZip'];
-$shipCountry = $_SESSION['shipCountry'];
+$shipFirstName = $_SESSION['ship_first_name'];
+$shipLastName = $_SESSION['ship_last_name'];
+$shipAddress = $_SESSION['ship_address_line1'] .$_SESSION['ship_address_line2'];
+$shipCity = $_SESSION['ship_city'];
+$shipZip = $_SESSION['ship_zip'];
+$shipCountry = $_SESSION['ship_country'];
 $total = $_SESSION['total'];
 $subTotal = $_SESSION['subtotal'];
+$taxes = $_SESSION['tax'];
+
+
 
 
 //SESSION VARIABLES $_SESSION[]
@@ -163,7 +166,7 @@ $subTotal = $_SESSION['subtotal'];
 						<ul class="list">
 							<li><a href="#"><span>Order number</span> : 321</a></li>
 							<li><a href="#"><span>Date</span> : <?php echo $confirm_date?></a></li>
-							<li><a href="#"><span>Total</span> : $<?php echo $total?></a></li>
+							<li><a href="#"><span>Total</span> : $<?php echo number_format($total,2)?></a></li>
 							<li><a href="#"><span>Payment method</span> : Paypal</a></li>
 						</ul>
 					</div>
@@ -249,6 +252,17 @@ $subTotal = $_SESSION['subtotal'];
 									<p><?php echo "$".number_format($subTotal, 2)?></p>
 								</td>
 							</tr>
+														<tr>
+								<td>
+									<h4>Taxes</h4>
+								</td>
+								<td>
+									<h5></h5>
+								</td>
+								<td>
+									<p><?php echo "$".number_format($taxes, 2)?></p>
+								</td>
+							</tr>
 							<tr>
 								<td>
 									<h4>Shipping</h4>
@@ -275,7 +289,20 @@ $subTotal = $_SESSION['subtotal'];
 					</table>
 				</div>
 			</div>
-						         <a href="invoice.php" class="submit_btn text-white btn-block text-center mt-3">Print Invoice</a>
+
+                               <?php
+                                   $sql = "SELECT invoice_id FROM invoice WHERE invoice_id=(SELECT max(invoice_id) FROM invoice);";
+                                   $result = mysqli_query($conn, $sql);
+                                   $row = mysqli_fetch_assoc($result);
+                                   $invoice_id = $row['invoice_id'];
+                                   echo "
+
+											     <a href='invoice.php?invoice_id={$invoice_id}' class='submit_btn text-white btn-block text-center mt-3'>Print Invoice</a>
+
+                                   ";
+                               ?>
+
+						        
 
 		</div>
 
