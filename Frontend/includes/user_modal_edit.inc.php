@@ -27,5 +27,5 @@
     echo                '<div class="form-group"><label class="small mb-1" for="inputConfirmPassword">Confirm Password</label><input class="form-control py-4" name="pass_confirm" type="password" placeholder="Confirm password" required></div>';
     echo            '</div>';
     echo        '</div>';
-    echo        '<div class="form-group mt-4 mb-0"><button class="btn btn-block" name="edit-submit" value="'.$row['id'].'" type="submit" style="background-color: #a8fdcc"><i class="far fa-edit" aria-hidden="true"></i></button></button></div>';
+    echo        '<div class="form-group mt-4 mb-0"><button class="btn btn-block" name="edit-submit" value="'.$row['id'].'" type="submit" style="background-color: #a8fdcc"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button></button></div>';
     echo    '</form>';
