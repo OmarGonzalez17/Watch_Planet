@@ -25,6 +25,17 @@ if($resultCheck > 0){
 	$ship_zip = $row['ship_zip'];
 }
 
+$sql = "SELECT * FROM users WHERE users.id = $user_id";
+$user_result = mysqli_query($conn, $sql);
+$user_resultCheck = mysqli_num_rows($user_result);
+$user_row = mysqli_fetch_assoc($user_result);
+
+if($user_resultCheck > 0){
+	$name = $user_row['name'];
+	$last_name = $user_row['last_name'];
+	$email = $user_row['email'];
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="zxx" class="no-js">
@@ -128,11 +139,13 @@ if($resultCheck > 0){
 				<div class="row">
 					<div class="col-lg-4">
 						<div class="details_item">
-							<h4>Account</h4>
+						<?php
+							echo '<h4>Account <a href="#" onclick="editId('.$_SESSION['id'].')" data-toggle="modal" data-target="#user-edit"><i class="fa fa-pencil-square-o"></i></a></h4>';
+						?>	
 							<ul class="list">
-								<li><span>Name</span> : <?php echo $_SESSION["name"]?></li>
-								<li><span>Last Name</span> : <?php echo $_SESSION["last_name"]?></li>
-								<li><span>Email</span> : <?php echo $_SESSION["email"]?></li>
+								<li><span>Name</span> : <?php echo $name?></li>
+								<li><span>Last Name</span> : <?php echo $last_name?></li>
+								<li><span>Email</span> : <?php echo $email?></li>
 								<?php
 								if ($resultCheck > 0) {	
 									echo '<li><span>Phone Number</span> : '.$phone_number.'</li>';
@@ -143,11 +156,11 @@ if($resultCheck > 0){
 					</div>
 					<?php
 
-
+					if ($resultCheck > 0) {	
 					echo
 					'<div class="col-lg-4">
 					<div class="details_item">
-					<h4>Shipping Address <a href="#"><i class="fa fa-pencil-square-o"></i></a></h4>
+					<h4>Shipping Address </h4>
 					<ul class="list">
 					<li><span>Street </span>: '.$ship_street.'</li>
 					<li><span>City </span>: '.$ship_city.'</li>
@@ -158,7 +171,7 @@ if($resultCheck > 0){
 					</div>
 					<div class="col-lg-4">
 					<div class="details_item">
-					<h4>Billing Address <a href="#"><i class="fa fa-pencil-square-o"></i></a></h4>
+					<h4>Billing Address </h4>
 					<ul class="list">
 					<li><span>Street </span>: '.$street.'</li>
 					<li><span>City </span>: '.$city.'</li>
@@ -167,7 +180,7 @@ if($resultCheck > 0){
 					</ul>
 					</div>
 					</div>';
-
+					}
 					?>
 				</div>
 				<hr>
@@ -259,6 +272,18 @@ if($resultCheck > 0){
 				<p class="mx-auto">Copyright &copy; 2020 All rights reserved  |  <a class="a-color disabled" href="">Privacy Policy</a> &middot; <a class="a-color disabled" href="">Terms &amp; Conditions</a></p>
 			</div>
 		</div>
+		<div id="user-edit" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-lg py-4">
+                <div class="modal-content border-5 mt-3">
+                    <div class="modal-header bg-light text-center ">
+                        <h3 class="font-weight-light my-2 w-100">Edit User</h3>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body" id="modal-edit">
+                    </div>
+                </div>
+            </div>
+        </div>
 	</footer>
 	<!-- End footer Area -->
 
@@ -277,6 +302,13 @@ if($resultCheck > 0){
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
 	<script src="js/gmaps.min.js"></script>
 	<script src="js/main.js"></script>
+	<script>
+            function editId(id) {
+                jQuery("#modal-edit").load("includes/user_modal_edit.inc.php", {
+                idNewId: id
+            });
+            }
+    </script>
 </body>
 
 
