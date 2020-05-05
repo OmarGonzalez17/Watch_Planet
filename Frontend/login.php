@@ -159,7 +159,7 @@
             <div class="modal-dialog modal-lg py-4">
                 <div class="modal-content border-5 mt-3">
                     <div class="modal-header bg-light text-center ">
-                        <h3 class="font-weight-light my-2 w-100">Change Password</h3>
+                        <h3 class="font-weight-light my-2 w-100">Forgot Password</h3>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body" id="modal-edit">
