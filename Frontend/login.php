@@ -120,7 +120,7 @@
 							</div>
 							<div class="col-md-12 form-group">
 								<button type="submit" name="login-submit" class="primary-btn">Log In</button>
-								<a href="#">Forgot Password?</a>
+								<a href="#" onclick="editId()" data-toggle="modal" data-target="#user-edit">Forgot Password?</a>
 							</div>
 						</form>
 					</div>
@@ -154,6 +154,19 @@
 				<p class="mx-auto">Copyright &copy; 2020 All rights reserved  |  <a class="a-color disabled" href="">Privacy Policy</a> &middot; <a class="a-color disabled" href="">Terms &amp; Conditions</a></p>
              </div>
 		</div>
+
+		<div id="user-edit" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-lg py-4">
+                <div class="modal-content border-5 mt-3">
+                    <div class="modal-header bg-light text-center ">
+                        <h3 class="font-weight-light my-2 w-100">Change Password</h3>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body" id="modal-edit">
+                    </div>
+                </div>
+            </div>
+        </div>
 	</footer>
 	<!-- End footer Area -->
 
@@ -172,6 +185,14 @@
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
 	<script src="js/gmaps.min.js"></script>
 	<script src="js/main.js"></script>
+
+	<script>
+            function editId() {
+                jQuery("#modal-edit").load("includes/forgot_password_modal.inc.php", {
+                // idNewId: id
+            });
+            }
+    </script>
 </body>
 
 </html>

@@ -117,10 +117,6 @@
 							<div class="col-md-12 form-group">
 								<input type="password" class="form-control" id="pass_confirm" name="pass_confirm" placeholder="Confirm Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Confirm Password'">
 							</div>
-							<div class="col-md-12 form-group">
-								<button type="submit" name="signup-submit" value="signup-submit" class="primary-btn">Create Account</button>
-								<a href="#">Forgot Password?</a>
-							</div>
 						</form>
 					</div>
 				</div>
