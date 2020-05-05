@@ -13,7 +13,7 @@
         $pass = mysqli_real_escape_string($conn, $_POST['pass']);
         $pass_confirm = mysqli_real_escape_string($conn, $_POST['pass_confirm']);
         }else{
-            header("Location: ../login.php");
+            header("Location: ../login.php?error=EmailNotFound");
             exit();
         }
         if ($pass !== $pass_confirm) {
@@ -36,7 +36,7 @@
                     
                     mysqli_stmt_bind_param($stmt, "ss", $hashedPwd, $email);
                     mysqli_stmt_execute($stmt);
-                    header("Location: ../login.php?error=SUCCESS");
+                    header("Location: ../login.php?success");
                     exit();
                 }
                 
